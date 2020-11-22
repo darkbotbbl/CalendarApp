@@ -1,5 +1,8 @@
 <template>
     <div id="calendar-entry">
+        <div class="alert alert-danger text-center" role="alert" v-if="error">
+            <strong>danger</strong>
+        </div>
         <div class="row justify-content-center">
             <div class="col-2 g-entry-box">
                 
@@ -10,10 +13,11 @@
                         id="eventText" 
                         aria-describedby="eventHelp"
                         placeholder="Event Name"
+                        v-model="inputDetails"
                     >
                     <small id="eventHelpHelp" class="form-text text-success text-black">Day of Event: <span class="text-bold">{{ titleOfActiveDay }}</span></small>
                 </div>
-                <button @submit.prevent="" type="submit" class="btn btn-outline-success">Submit</button>
+                <button @click.prevent="submitEvent(inputDetails)" type="button" class="btn btn-outline-success">Add Task</button>
                 
             </div>
         </div>
@@ -28,12 +32,24 @@ export default {
     name: "CalendarEntry",
     data() {
         return {
-            
+            inputDetails: "",
+            error: false,
         }
     },
     computed: {
         titleOfActiveDay() {
             return store.getActiveDay().fullTitle
+        }
+    },
+    methods: {
+        submitEvent(eventDetails) {
+            if (eventDetails === '') {
+                return this.error = true
+            }
+
+            store.submitEvent(eventDetails);
+            this.inputDetails = ""; // reset the input details
+            this.error = false;
         }
     }
 }

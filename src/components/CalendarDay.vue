@@ -3,7 +3,7 @@
         <div class="g-day-box text-center mb-1">{{ day.abbvTitle }}</div>
         <div class="row justify-content-center m-1">
             <div class="col-12"><span class="g-day-number">{{ day.id }}</span></div>
-            <CalendarEvent :events="day.events"/>
+            <CalendarEvent :events="day.events" :day="day"/>
         </div>
     </div>
 </template>
