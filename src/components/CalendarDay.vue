@@ -1,5 +1,5 @@
 <template>
-    <div class=" g-col-box">
+    <div class=" g-col-box" @click="setActiveDay(day.id)">
         <div class="g-day-box text-center mb-1">{{ day.abbvTitle }}</div>
         <div class="row justify-content-center m-1">
             <div class="col-12"><span class="g-day-number">{{ day.id }}</span></div>
@@ -11,6 +11,8 @@
 
 <script>
 import CalendarEvent from "./CalendarEvent.vue"
+import { store } from "../store.js"
+
 export default {
     name: "CalendarDay",
     data() {
@@ -22,6 +24,11 @@ export default {
         CalendarEvent,
     },
     props: ['day'],
+    methods: {
+        setActiveDay(dayId) {
+            store.setActiveDay(dayId);
+        }
+    }
 }
 </script>
 

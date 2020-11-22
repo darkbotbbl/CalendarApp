@@ -2,19 +2,19 @@
     <div id="calendar-entry">
         <div class="row justify-content-center">
             <div class="col-2 g-entry-box">
-                <form action="." method="post" class="mt-4">
-                    <div class="form-group">
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            id="eventText" 
-                            aria-describedby="eventHelp"
-                            placeholder="Event Name"
-                        >
-                        <small id="eventHelpHelp" class="form-text text-success text-black">Day of Event: <span class="text-bold">Monday</span></small>
-                    </div>
-                    <button type="submit" class="btn btn-outline-success">Submit</button>
-                </form>
+                
+                <div class="form-group mt-4">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="eventText" 
+                        aria-describedby="eventHelp"
+                        placeholder="Event Name"
+                    >
+                    <small id="eventHelpHelp" class="form-text text-success text-black">Day of Event: <span class="text-bold">{{ titleOfActiveDay }}</span></small>
+                </div>
+                <button @submit.prevent="" type="submit" class="btn btn-outline-success">Submit</button>
+                
             </div>
         </div>
     </div>
@@ -22,6 +22,8 @@
 
 
 <script>
+import { store } from "../store.js"
+
 export default {
     name: "CalendarEntry",
     data() {
@@ -29,6 +31,11 @@ export default {
             
         }
     },
+    computed: {
+        titleOfActiveDay() {
+            return store.getActiveDay().fullTitle
+        }
+    }
 }
 </script>
 
